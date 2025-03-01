@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Animation
+    </title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.523);
+            flex-direction: column;
+        }
+
+        .heart-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            cursor: pointer;
+        }
+
+        .heart {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: rgb(79, 24, 24);
+            transform: rotate(-45deg);
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: rgb(83, 13, 13);
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -60px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 60px;
+            top: 0;
+        }
+
+        @keyframes beat {
+            0%, 100% {
+                transform: scale(1) rotate(-45deg);
+            }
+            50% {
+                transform: scale(1.2) rotate(-45deg);
+            }
+        }
+
+        .animate {
+            animation: beat 0.5s ease-in-out 3;
+        }
+
+        .info {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgb(51, 5, 5);
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .show-info {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="heart-container" onclick="animateHeart()">
+        <div class="heart"></div>
+        <div class="info" id="infoText">I miss you!</div>
+    </div>
+
+    <script>
+        function animateHeart() {
+            const heart = document.querySelector(".heart");
+            const info = document.getElementById("infoText");
+
+            heart.classList.add("animate");
+            info.classList.add("show-info");
+
+            setTimeout(() => {
+                heart.classList.remove("animate");
+            }, 1500);
+        }
+    </script>
+
+</body>
+</html>
